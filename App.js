@@ -16,9 +16,23 @@ export default function App() {
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
 
+    function  Login() {
+        let correctPassword = "Password123"
+        if (username === "" || password === "") {
+            return ToastAndroid.show("Empty fields",ToastAndroid.SHORT)
+        }
+
+        if (password !== correctPassword) {
+            return ToastAndroid.show("Wrong password",ToastAndroid.SHORT)
+        }
+
+        ToastAndroid.show(`Welcome ${role} ${username}`,ToastAndroid.SHORT)
+
+    }
+
   return (
     <View style={styles.container}>
-
+        <Text>User type:</Text>
         <Picker selectedValue={role} onValueChange={(value) => setRole(value)} style={{height : 200 , width : 200}}>
             <Picker.Item label='Admin' value='Admin'/>
             <Picker.Item label="Guest" value="Guest"/>
@@ -26,8 +40,8 @@ export default function App() {
         <Text>Username:</Text>
         <TextInput placeholder={"Username:"} style={styles.TextInputs} onChangeText={(value) => {setUsername(value)}} />
         <Text>Password : </Text>
-        <TextInput placeholder={"Password:"} style={styles.TextInputs} onChangeText={(value) => {setPassword(password)}}/>
-        <TouchableOpacity onPress={() => {ToastAndroid.show(`Welcome ${role} ${username}`,ToastAndroid.SHORT)}}>
+        <TextInput placeholder={"Password:"} style={styles.TextInputs} onChangeText={(value) => {setPassword(value)}}/>
+        <TouchableOpacity onPress={() => {Login} }>
             <Text>LOG IN</Text>
         </TouchableOpacity>
 
